@@ -1,0 +1,52 @@
+---
+title: "Módulo 1 - Análise descritiva e probabilidade"
+author: "João Vitor Toste"
+date: "2026-08-13"
+output: html_document
+---
+
+Módulo 1 - Aula 3
+
+Distribuição exponencial
+
+De maneira geral, a distribuição exponencial é utilziada para calcular tempo, como o tempo de espera numa fila, tempo de transmissão de internet e etc. Embora a distirbuição exponencial calcule tempo, ela é a única, podemos usasr a normal, weybow...
+
+Exercicio 1 - O tempo de espera em uma fila para realizar o pagamento dos produtos adquiridos na loja segue uma distribuição exponencial com parâmetro (alpha) 1/5 minutos.
+
+a) Qual a probabilidade de que uma pessoa espere um tempo menor do que a média? e qual a média nesse caso?
+
+```{r}
+alpha = 1/5
+média = 1/alpha
+paste0("A média de tempo é de ", média, " minutos")
+paste0("A probabilidade de que uma pessoa espere um tempo menor do que a média é de  ", round(pexp(média, alpha, lower.tail = TRUE)*100,2), "%")
+```
+
+Qual a probailidade de que uma pessoa espere entre 4 e 6 minutos na fila até o atendimento?
+
+```{r}
+alpha = 1/5
+média = 1/alpha
+paste0("A probabilidade de que uma pessoa espere entre 4 e 6 minuto na fila é de  ", round((pexp(6, alpha, lower.tail = TRUE)-pexp(4, alpha, lower.tail = TRUE))*100,2), "%")
+```
+
+Exercicio 2 - Suponha que o tempo de vida de um celular seja modelado pela distribuição exponencial apresentando uma média de 2 anos.
+
+a) Calcule a probabilidade do aparelho durar menos que do que o tempo de cobertura de garantia estabelecida pela fábrica que é de 1 ano.
+
+```{r}
+média = 2 
+alpha = 1/2 #Se a média é o inverso do parâmetro, então p parâmetro é o inverso da média
+paste0("A probabilidade do aparelho durar menos que do que o tempo de cobertura de garantia (1 ano) estabelecida pela fábrica é de  ", round((pexp(1, alpha, lower.tail = TRUE))*100,2), "%")
+```
+
+B) Sabendo que a garantia acabou de vencer sem que o aparelho apresentasse problema, calcule a probabilidade do aparelho durar pelo menos mais um ano
+
+```{r}
+média = 2 
+alpha = 1/2 #Se a média é o inverso do parâmetro, então p parâmetro é o inverso da média
+paste0("A probabilidade do aparelho durar menos que do que o tempo de cobertura de garantia (1 ano) estabelecida pela fábrica é de  ", round((pexp(2, alpha, lower.tail = FALSE)/pexp(1, alpha, lower.tail = FALSE))*100,2), "%")
+paste0("A probabilidade do aparelho durar menos que do que o tempo de cobertura de garantia (1 ano) estabelecida pela fábrica é de  ", round(pexp(1, alpha, lower.tail = FALSE)*100,2),"%")
+```
+
+Aqui há uma probabilidade condicional no entanto, por se tratar de uma distribuição exponencial, pode ser aplicada a "propriedade de falta de memória", esta propriedade basicamente ignora o periodo condicional e calcula o restante.
