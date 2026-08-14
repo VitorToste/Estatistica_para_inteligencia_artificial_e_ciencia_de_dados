@@ -5,7 +5,7 @@ date: "2026-08-13"
 output: html_document
 ---
 
-Módulo 1 - Aula 3
+Módulo 1 - Unidade 3.6
 
 Distribuição exponencial
 
@@ -50,3 +50,10 @@ paste0("A probabilidade do aparelho durar menos que do que o tempo de cobertura 
 ```
 
 Aqui há uma probabilidade condicional no entanto, por se tratar de uma distribuição exponencial, pode ser aplicada a "propriedade de falta de memória", esta propriedade basicamente ignora o periodo condicional e calcula o restante.
+
+Módulo 1 - Unidade 3.7
+
+Distribuição normal
+
+Os parâmetros da distribuição normal são a média e a variância. Propriedade da distibuição normal: simetria em relação a média, assim, a moda, mediana e média tem o mesmo valor.Além disso, a distribuição normal fica delimitada pelo seu desvio padrão e sua média. As maiores probabilidades de ocorrencia estão em torno da média
+
