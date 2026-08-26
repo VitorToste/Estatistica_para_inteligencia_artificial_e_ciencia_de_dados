@@ -5,7 +5,7 @@ date: "2026-08-13"
 output: html_document
 ---
 
-Módulo 1 - Unidade 3.6
+# Módulo 1 - Unidade 3.6
 
 Distribuição exponencial
 
@@ -51,9 +51,60 @@ paste0("A probabilidade do aparelho durar menos que do que o tempo de cobertura 
 
 Aqui há uma probabilidade condicional no entanto, por se tratar de uma distribuição exponencial, pode ser aplicada a "propriedade de falta de memória", esta propriedade basicamente ignora o periodo condicional e calcula o restante.
 
-Módulo 1 - Unidade 3.7
+#  Módulo 1 - Unidade 3.7
 
 Distribuição normal
 
-Os parâmetros da distribuição normal são a média e a variância. Propriedade da distibuição normal: simetria em relação a média, assim, a moda, mediana e média tem o mesmo valor.Além disso, a distribuição normal fica delimitada pelo seu desvio padrão e sua média. As maiores probabilidades de ocorrencia estão em torno da média
+Os parâmetros da distribuição normal são a média e a variância. Propriedade da distibuição normal: simetria em relação a média, assim, a moda, mediana e média tem o mesmo valor.Além disso, a distribuição normal fica delimitada pelo seu desvio padrão e sua média. As maiores probabilidades de ocorrencia estão em torno da média.
 
+
+# Módulo 1 - Unidade 3.8
+
+Exercicio 1 - O porto de South Louisiana, localizado ao longo de 54 milhas do Rio Mississipi, entre Nova Orleans e Bton ROuge, é o maior ponto da carga a granel do mundo. A quantidade de toneldas decargas mopvimentadas por semana é normalmente distribuida com uma média de 4, 5 milhões de toneladas de carga por semanae um desvio padrão de 0,82 milhão de toneladas.
+
+a) Calcule a probabilidade do porto manejar menos de 5 milhões de toneladas de carga por semana.
+
+```{r}
+paste0("A probabilidade do porto manejar menos de 5 milhões de toneladas de carga por semana é de  ", round(pnorm(5,4.5,0.85)*100,2), "%")
+```
+
+b) Calcule a probabilidade do porto manejar 3 milhões de toneladas ou mais de carga por semana.
+
+```{r}
+paste0("A probabilidade do porto manejar 3 milhões de toneladas ou mais de carga por semana é de  ", round(pnorm(3,4.5,0.85,lower.tail = FALSE)*100,2), "%")
+```
+
+Exercicio 2 - Os prazos de duração de gravidez têm distribuição normal com média de 268 dias e desvio padrão de 15 dias. Se definirmos como prematura uma criança, cujo período de gestação esteja nos 4% inferiores. Calcule o prazo de gestação que separa as crianças prematuras e não prematuras.
+```{r}
+paste0("O prazo de gestação que separa as crianças prematuras e não prematuras é de  ", round(qnorm(p = 0.04,mean = 268,sd = 15),0))
+```
+
+
+Exercicio 3 - Os QI's tem distribuição normal com média 100 e desvio padrão 15. Definindo como gênio uma pessoa no 1% superior dos valores de QI,determine o valores que separa os gênios das pessoas comuns.
+```{r}
+paste0("O prazo de gestação que separa as crianças prematuras e não prematuras é de  ", round(qnorm(p = 0.01,mean = 100,sd = 15, lower.tail = FALSE),0))
+```
+
+# Módulo 1 - Unidade 3.9 - Desigualdade de Chebychev
+
+# A desigualdade de Chebychev desempenha um papel muito importante, nos fornecendo meios de compreender precisamente como a variância mede a variabilidade em relação ao valor esperado de uma variável aleatória. Essa desigualdade nos diz a proporção dos valores de uma distribuição que fi a entre a média até k desvios padrões distante da média. De acordo com essa desigualdade, para qualquer distribuição de variância finita, a proporção de observações que ficam até k desvios padrão da média é maior ou igual a 1-(1/k^2) para todok > 0.
+Ou seja, seja X uma variável aleatória, com esperança E(X) = /mu e variância Var (X) = /sigma^2 e qualquer k> 0, temos:
+$$
+P[\ |X-\mu \ | \geq k\sigma] \leq
+ 1/k^2 \ OU \ P\ [ \ |X - \mu \ | \leq
+ k\sigma] \geq 1- \frac{1}{k^2}
+$$
+
+Exemplo: X é uma variável aleaória com distribuição normal (/mu = 0 e /sigma = 1)
+
+A importância dessa desigualdade vem de sua generalidade. Repare que a desigualdade se aplica independentemente da distirbuição dos dados. Observação importante
+
+Exemplo: Admita que uma determinada variável X seja normalmentee distribuida com méda igual a 30 e variancia igaul a 100. Qual é a probabilidade de X estar compreendido no intervalo de dois desvios padrões de sua média? Nesse caso, sabemos que X tem uma  distribuição Normal! Preciamos calcular $P[ \ |X- \mu| <= 2\sigma]$. Utilisando a desigualdade de Chebyshev: $P[\ |X- \mu \leq 2\sigma] \geq 1 - \frac{1}{2^2}$ -> 75%, utilizando a distribuiçaõ normal: $P[\ (30-2 * 10) \leq X \leq (30/2 * 10)] = P[1 0 \leq X \leq 50]$ = 95,45%.
+
+# Módulo 1 - Unidade 3.10 - Teorema do Limite Central
+
+Esse teorema nos diz que para amostras aleatórias simples, retiradas de uma determindada populaçaõ com média /mu e variancia /sigma^2 finita, a distribuição amostral da média $\hat{X}$ aproxima-se, para n grande, de uma distribuição normal, com média /mu e variancia (/sigma^2)/n. Se o tamanho da amostra for grande o suficiente, a distribuição das médias amostrais pode ser aproximada por uma distribuição normal, mesmo que a população de origem sendo completamente diferente de uma normal.
+Uma razão para a distribuição normal ser considerada tão importante, é porque qualquer que seja a distribuição da variável de interesse para grandes amostras, a distribuição das médias amostrais serão aproximandamente normalmente distribuídas, e tenderão a um distribuição normal á medida que o tamanho da amostra crescer. Então podemos ter uma variável origunal com uma distribuição muito diferente da Normal, mas se tomarmosvárias amostras grandes desta distribuição, e então fizermos um histograma das médais amostrias, a forma se parecerá com uma curva normal.
+A vantagem da normalidade é uma suposição em muitos métodos estatísticos, como testes de hipóteses e itntervalos de confiança. O teorema central do limite permite que usemos a distribuição normal para fazer ifnerências sobre a média populacional, mesmo quando não conhecemos a distribuição da população original.
+
+# Módulo 1 - Unidade 3.11 - Lei dos Grandes Números
