@@ -99,7 +99,7 @@ Exemplo: X é uma variável aleaória com distribuição normal (/mu = 0 e /sigm
 
 A importância dessa desigualdade vem de sua generalidade. Repare que a desigualdade se aplica independentemente da distirbuição dos dados. Observação importante
 
-Exemplo: Admita que uma determinada variável X seja normalmentee distribuida com méda igual a 30 e variancia igaul a 100. Qual é a probabilidade de X estar compreendido no intervalo de dois desvios padrões de sua média? Nesse caso, sabemos que X tem uma  distribuição Normal! Preciamos calcular $P[ \ |X- \mu| <= 2\sigma]$. Utilisando a desigualdade de Chebyshev: $P[\ |X- \mu \leq 2\sigma] \geq 1 - \frac{1}{2^2}$ -> 75%, utilizando a distribuiçaõ normal: $P[\ (30-2 * 10) \leq X \leq (30/2 * 10)] = P[1 0 \leq X \leq 50]$ = 95,45%.
+Exemplo: Admita que uma determinada variável X seja normalmentee distribuida com méda igual a 30 e variancia igaul a 100. Qual é a probabilidade de X estar compreendido no intervalo de dois desvios padrões de sua média? Nesse caso, sabemos que X tem uma  distribuição Normal! Preciamos calcular $P[ \ |X- \mu| <= 2\sigma]$. Utilizando a desigualdade de Chebyshev: $P[\ |X- \mu \leq 2\sigma] \geq 1 - \frac{1}{2^2}$ -> 75%, utilizando a distribuiçaõ normal: $P[\ (30-2 * 10) \leq X \leq (30/2 * 10)] = P[1 0 \leq X \leq 50]$ = 95,45%.
 
 # Módulo 1 - Unidade 3.10 - Teorema do Limite Central
 
@@ -108,3 +108,75 @@ Uma razão para a distribuição normal ser considerada tão importante, é porq
 A vantagem da normalidade é uma suposição em muitos métodos estatísticos, como testes de hipóteses e itntervalos de confiança. O teorema central do limite permite que usemos a distribuição normal para fazer ifnerências sobre a média populacional, mesmo quando não conhecemos a distribuição da população original.
 
 # Módulo 1 - Unidade 3.11 - Lei dos Grandes Números
+
+A lei dos grandes números doi mencionada pela primeira vexz pelo matemático gerolamo cardano (1501 - 1576), quando afirmou que a precisão das estatísticas empíricas tende a melhorar á medida que o número de tentativas aumenta. Essa lei diz que a medida que um experimento é repetido vairas vezes, a probabilidade se aproxima cada vez mais da verdadeira probabilidade. Essa lei reflete uma noção simples pelo senso comum: uma estimativa de probabilidade baseada em apenas umas poucas tentativas pode apresentar grandes divergências, mas com um número muito grande de tentativas, a estimativva tende a ser mais precisa.
+
+# Módulo 1 - Unidade 3.12 - Aplicação de Inteligência Artificialna análise descritiva e probabilística.
+
+# Módulo 1 - Atividade obejtiva 3
+
+A quantidade de cafeína em uma xicara de café é uma variável aleatória normalmente distribuida com média 115 e desvio padrão de 20mg. Qual a probabilidade de uma xicara escolhida ao acaso ter mais de 130 mg de cafeína?
+
+```{r}
+paste0("A probabilidade de uma xicara escolhida ao acaso ter mais de 130 mg de cafeína é de ", round(pnorm(130,115,20,lower.tail = F)*100,2),"%")
+```
+
+Os montantes gastos pelos clientes em um restaurante da Noodles&Company durante o horário de almoço são normlamente distribuídos com média igual a US$ 7 e um desvio padrão igual a 0,35 centavos. Quall montante representa o primeiro quartil?
+
+```{r}
+paste0(" montante representa o primeiro quartil é de US$ ", round(qnorm(0.25,7,0.35),2))
+```
+
+O tempo de utilização de um caixa eletrônico por clientes de um certo banco, em minutos, foi modelado por uma variável T comdistirbuição exponencial com parametro igual a 3. Determine a probabilidade de que um cliente demore menos de um minuto usando o caixa eletronico?
+
+```{r}
+alpha = 3
+média = 1/alpha
+paste0("A probabilidade de que um cliente demore menos de um minuto usando o caixa eletronico é de  ", round(pexp(1, alpha, lower.tail = TRUE)*100,2), "%")
+```
+
+Uma indústria de tintas recebe pedidos de seus vendedores através de telefone e internet. O número médio de pedidos, que chegam por qualquer meio, é de 5 por hora. Em um dia de trabalho (8 horas), qual a seria a probabilidade de haver 50 pedidos?
+
+```{r}
+paste0( "A probabilidade de haver exatamente 50 pedidos em um dia de 8 horas é de: ", round(dpois(50, 40) * 100, 2),"%")
+```
+Um engenheiro de inspeção extrai uma amostra de  15 itens de fabricação. Sabe-se qe 85% dos itens produzidos são aceitáveis. Qual a probabilidade de que entre 12 e 14 dos itens extraídos sejam aceitáveis?
+```{r}
+dbinom(x = 12,size = 15,prob = 0.85) + dbinom(x = 13,size = 15,prob = 0.85) + dbinom(x = 14,size = 15,prob = 0.85) 
+```
+
+
+# Módulo 1 - Unidade 4.2 - Coeficiente de correlação de pearson 
+
+O coeficiente de correlação de Pearson é usado quando a relação entre as variáveis é linear e quando não há valores discrepantes
+
+
+# Módulo 1 - Unidade 4.3 - Coeficiente de correlação de Spearman
+
+O coeficiente de correlação de Spearman mede o grau de associação monotônica entre duas ordens (ranks, dados ordinais), não exige linearidade, nem normalidade. Pode ser usado com a presença de outlier. É usado quando se quer comparar posicionamento.
+
+Pearson: Quão perto os pontos se alinham numa reta linear,imagine uma reta diagonal
+Spearman: Elas caminham junto em uma  direção? imagine uma curva em S por exemplo? A diferença é que pearson a relação é linear, Spearman a relação não é linear, pode ser exponencial, logaritma ou até sigmoide
+
+# Módulo 1 - Unidade 4.3 - Testes de hipótese - Pearson
+
+H0 = Não existe correlação entre as variáveis na população, se p-valor < $\alpha$, rejeita H0
+H1 = Existe correlação entre as variáveis na população,  se p-valor > $\alpha$, não rejeita h0
+
+Distribuição utilizada -> T-Student com grau de liberdade
+
+Se o dado é uma série temporal, o teste de hipótese tem uma das premissas violadas, que é a independencia das observações
+Amostras pequenas comprometem os resutados
+
+# Módulo 1 - Unidade 4.3 - Testes de hipótese - Spearman
+
+A fórmula matemática é a mesma de pearson quando n > 10
+H0 = Não existe relação monotonica entre as variáveis na população, se p-valor < $\alpha$, rejeita H0
+H1 = Existerelação monotonica entre as variáveis na população,  se p-valor > $\alpha$, não rejeita h0
+
+Distribuição utilizada -> T-Student com grau de liberdade
+
+# Módulo 1 - Unidade 4.6 - Curiosidades da correlação
+
+Variável oculta, é uma variável que faz as duas variáveis que estao sendo investigadas terem correlação
+C
